@@ -208,8 +208,30 @@ Resources:
             Condition:
               BoolIfExists:
                 'aws:MultiFactorAuthPresent': 'false'
+  # Service roles
+  PackerServiceRole:
+    Type: "AWS::IAM::Role"
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          -
+            Effect: "Allow"
+            Principal:
+              AWS:
+                - !ImportValue {'Fn::Sub': '${AWS::Region}-bootstrap-TravisUserArn'}
+                - !GetAtt AWSIAMKhaiDoUser.Arn
+            Action:
+              - "sts:AssumeRole"
+      Path: "/"
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AmazonEC2FullAccess
 Outputs:
   AWSIAMEnforceMfaPolicy:
     Value: !Ref AWSIAMEnforceMfaPolicy
     Export:
       Name: !Sub '${AWS::Region}-${AWS::StackName}-EnforceMfaPolicy'
+  PackerServiceRoleArn:
+    Value: !GetAtt PackerServiceRole.Arn
+    Export:
+      Name: !Sub '${AWS::Region}-${AWS::StackName}-PackerServiceRoleArn'

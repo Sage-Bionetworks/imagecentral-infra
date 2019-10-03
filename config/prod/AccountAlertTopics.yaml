@@ -3,7 +3,7 @@ stack_name: "AccountAlertTopics"
 dependencies:
   - "prod/bootstrap.yaml"
 parameters:
-  InitialSubscriberEmail: "aws.imagecentral@sagebase"
+  InitialSubscriberEmail: "aws.imagecentral@sagebase.org"
   EnableSubscriberSMS: "false"
   BillingThreshold: "1000"
   DeployLambda: "true"

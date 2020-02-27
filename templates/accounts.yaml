@@ -32,6 +32,15 @@ Resources:
       LoginProfile:
         Password: !Ref InitNewUserPassword
         PasswordResetRequired: true
+  AWSIAMThomasYuUser:
+    Type: 'AWS::IAM::User'
+    Properties:
+      UserName: thomas.yu@sagebase.org
+      Groups:
+        - !Ref AWSIAMAllUsersGroup
+      LoginProfile:
+        Password: !Ref InitNewUserPassword
+        PasswordResetRequired: true
   AWSIAMDeveloperUsersGroup:
     Type: 'AWS::IAM::Group'
     Properties:
@@ -234,6 +243,7 @@ Resources:
                 - !ImportValue {'Fn::Sub': '${AWS::Region}-bootstrap-TravisUserArn'}
                 - !GetAtt AWSIAMKhaiDoUser.Arn
                 - !GetAtt AWSIAMAaronHaydenUser.Arn
+                - !GetAtt AWSIAMThomasYuUser.Arn
             Action:
               - "sts:AssumeRole"
       Path: "/"

@@ -38,6 +38,7 @@ Resources:
       UserName: thomas.yu@sagebase.org
       Groups:
         - !Ref AWSIAMAllUsersGroup
+        - !Ref AWSIAMImageLibrariansGroup
       LoginProfile:
         Password: !Ref InitNewUserPassword
         PasswordResetRequired: true
@@ -115,12 +116,27 @@ Resources:
       Roles:
         -
           !Ref AWSIAMAdminRole
+  AWSIAMAssumeRolePolicy:
+    Type: "AWS::IAM::Policy"
+    Properties:
+      PolicyName: "AssumeRole"
+      Groups:
+        - !Ref AWSIAMImageLibrariansGroup
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          -
+            Effect: "Allow"
+            Action: "sts:AssumeRole"
+            Resource: "*"
   AWSIAMAllUsersGroup:
     Type: 'AWS::IAM::Group'
     Properties:
       ManagedPolicyArns:
         - arn:aws:iam::aws:policy/ReadOnlyAccess
         - !Ref AWSIAMEnforceMfaPolicy
+  AWSIAMImageLibrariansGroup:
+    Type: 'AWS::IAM::Group'
   AWSIAMBillingManagersGroup:
     Type: 'AWS::IAM::Group'
     Properties:

@@ -296,7 +296,3 @@ Outputs:
     Value: !Ref AWSIAMPackerServiceUserAccessKey
     Export:
       Name: !Sub '${AWS::Region}-${AWS::StackName}-PackerServiceUserAccessKey'
-  AWSIAMPackerServiceUserSecretAccessKey:
-    Value: !GetAtt AWSIAMPackerServiceUserAccessKey.SecretAccessKey
-    Export:
-      Name: !Sub '${AWS::Region}-${AWS::StackName}-PackerServiceUserSecretAccessKey'

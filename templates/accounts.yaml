@@ -42,6 +42,15 @@ Resources:
       LoginProfile:
         Password: !Ref InitNewUserPassword
         PasswordResetRequired: true
+  AWSIAMPackerServiceUser:
+    Type: 'AWS::IAM::User'
+    Properties:
+      Groups:
+        - !Ref AWSIAMImageLibrariansGroup
+  AWSIAMPackerServiceUserAccessKey:
+    Type: 'AWS::IAM::AccessKey'
+    Properties:
+      UserName: !Ref AWSIAMPackerServiceUser
   AWSIAMDeveloperUsersGroup:
     Type: 'AWS::IAM::Group'
     Properties:
@@ -274,3 +283,19 @@ Outputs:
     Value: !GetAtt PackerServiceRole.Arn
     Export:
       Name: !Sub '${AWS::Region}-${AWS::StackName}-PackerServiceRoleArn'
+  AWSIAMPackerServiceUser:
+    Value: !Ref AWSIAMPackerServiceUser
+    Export:
+      Name: !Sub '${AWS::Region}-${AWS::StackName}-PackerServiceUser'
+  AWSIAMPackerServiceUserArn:
+    Value: !GetAtt AWSIAMPackerServiceUser.Arn
+    Export:
+      Name: !Sub '${AWS::Region}-${AWS::StackName}-PackerServiceUserArn'
+  AWSIAMPackerServiceUserAccessKey:
+    Value: !Ref AWSIAMPackerServiceUserAccessKey
+    Export:
+      Name: !Sub '${AWS::Region}-${AWS::StackName}-PackerServiceUserAccessKey'
+  AWSIAMPackerServiceUserSecretAccessKey:
+    Value: !GetAtt AWSIAMPackerServiceUserAccessKey.SecretAccessKey
+    Export:
+      Name: !Sub '${AWS::Region}-${AWS::StackName}-PackerServiceUserSecretAccessKey'

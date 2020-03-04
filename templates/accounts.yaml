@@ -269,6 +269,7 @@ Resources:
                 - !GetAtt AWSIAMKhaiDoUser.Arn
                 - !GetAtt AWSIAMAaronHaydenUser.Arn
                 - !GetAtt AWSIAMThomasYuUser.Arn
+                - !GetAtt AWSIAMPackerServiceUser.Arn
             Action:
               - "sts:AssumeRole"
       Path: "/"

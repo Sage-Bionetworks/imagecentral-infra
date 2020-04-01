@@ -52,6 +52,17 @@ Resources:
       LoginProfile:
         Password: !Ref InitNewUserPassword
         PasswordResetRequired: true
+  AWSIAMXSchildwachterUser:
+    Type: 'AWS::IAM::User'
+    Properties:
+      UserName: x.schildwachter@sagebase.org
+      Groups:
+        - !Ref AWSIAMAllUsersGroup
+        - !Ref AWSIAMDeveloperUsersGroup
+        - !Ref AWSIAMBillingManagersGroup
+      LoginProfile:
+        Password: !Ref InitNewUserPassword
+        PasswordResetRequired: true
   AWSIAMPackerServiceUser:
     Type: 'AWS::IAM::User'
     Properties:

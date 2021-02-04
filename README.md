@@ -1,3 +1,6 @@
+# This repo has noved to https://github.com/Sage-Bionetworks-IT/organizations-infra/tree/master/sceptre/imagecentral
+
+
 # Overview
 Install, configure and manage the AWS imagecentral account.
 
